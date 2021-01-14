@@ -1,0 +1,730 @@
+<app-home></app-home>
+
+<body>
+  <div id="main">
+    <div class="row">
+      <div class="pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+          <div class="row">
+            <div class="col s12 m6 l6">
+              <h5 class="breadcrumbs-title mt-0 mb-0">Establishment</h5>
+            </div>
+            <div class="col s12 m6 l6 right-align-md">
+              <ol class="breadcrumbs mb-0">
+                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                </li>
+                <li class="breadcrumb-item"><a href="#">Establishment</a>
+                </li>
+                <li class="breadcrumb-item active">Add
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12">
+        <div class="container">
+          <div class="section section-form-wizard">
+            <div class="row">
+              <div class="col s12">
+                <div class="card">
+                  <div class="card-content">
+                    <!-- <h4 class="card-title">Establishments</h4> -->
+                    <div class="row">
+                      <div class="col s12">
+                        <div class="card">
+                          <div class="card-content pb-0">
+
+
+                            <mat-horizontal-stepper [linear]="isLinear" labelPosition="bottom" #stepper>
+                              <mat-step>
+                                <form #general="ngForm">
+
+                                  <ng-template matStepLabel class="col s12">General</ng-template>
+                                  <div class="row">
+                                    <mat-form-field ngModel name="estabType" class="input-field col m6 s12">
+                                      <mat-select [formControl]="typeCtrl" placeholder="Accomodation Type"
+                                        #singleSelect>
+                                        <mat-option>
+                                          <ngx-mat-select-search [formControl]="typeFilterCtrl"></ngx-mat-select-search>
+                                        </mat-option>
+                                        <mat-option *ngFor="let type of filteredTypes | async" [value]="type._id">
+                                          {{type.name}}
+                                        </mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="input-field col m6 s12">
+                                      <mat-select [formControl]="chainCtrl" placeholder="Chain hotel" #singleSelect
+                                        ngModel>
+                                        <mat-option>
+                                          <ngx-mat-select-search [formControl]="chainFilterCtrl">
+                                          </ngx-mat-select-search>
+                                        </mat-option>
+                                        <mat-option *ngFor="let chain of filteredChains | async" [value]="chain._id">
+                                          {{chain.name}}
+                                        </mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+
+                                  </div>
+                                  <div class="row">
+                                    <div class="input-field col m6 s12">
+                                      <label for="code">Code<span class="red-text">*</span></label>
+                                      <input type="text" ngModel id="code" name="code" #code="ngModel" required>
+                                      <div *ngIf="code.touched && !code.valid" class="invalid-feedback">
+                                        <div *ngIf="code.errors.required"> code is required</div>
+                                      </div>
+                                    </div>
+
+                                    <div class="input-field col m6 s12">
+
+                                      <label for="name">Name<span class="red-text">*</span></label>
+                                      <input type="text" id="name" ngModel name="name" #name="ngModel" required>
+                                      <div *ngIf="name.touched && !name.valid" class="invalid-feedback">
+                                        <div *ngIf="name.errors.required"> Name is required</div>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    
+                                      <editor id="editor" ngModel name="editor">Description</editor>
+                                    
+                                  </div>
+                                  <div class="row">
+                                    
+                                        <mat-form-field  class="input-field col m4 s12">
+                                            <mat-label>Category</mat-label>
+                                            <mat-select ngModel name="stars">
+                                              <mat-option *ngFor="let c of categories" [value]="c">
+                                                  {{c}}
+                                              </mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
+                                    
+                                  
+                                        <mat-form-field  class="input-field col m4 s12">
+                                            <mat-label>Age BB</mat-label>
+                                            <mat-select ngModel name="ageBb">
+                                              <mat-option *ngFor="let bb of ageBb" [value]="bb">
+                                                  {{bb}}
+                                              </mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+                                   
+                                        <mat-form-field  class="input-field col m4 s12">
+                                            <mat-label>Age children</mat-label>
+                                            <mat-select ngModel name="ageCh">
+                                              <mat-option *ngFor="let ch of ageCh" [value]="ch">
+                                                  {{ch}}
+                                              </mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+                                   
+                                  </div>
+                                  <div class="row">
+                                    <div class="input-field col s12 m6">
+                                      <label for="curl0">Trip Advisor URL <span class="red-text">*</span></label>
+                                      <input required aria-required="true" id="urlAdvisor" #urlAdvisor="ngModel"
+                                        type="url" ngModel name="urlAdvisor">
+                                      <div *ngIf="urlAdvisor.touched && !urlAdvisor.valid" class="invalid-feedback">
+                                        <div *ngIf="urlAdvisor.errors.required"> Name is required</div>
+                                      </div>
+                                    </div>
+
+                                    <mat-form-field class="input-field col s12 m6">
+                                      <mat-label>Payment Method</mat-label>
+                                      <mat-select [formControl]="cards" multiple>
+                                        <mat-option *ngFor="let pay of paymentMethods" [value]="pay._id">
+                                          {{pay.name}}
+                                        </mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+
+
+                                  </div>
+                                  <div class="row">
+                                    <div class="min-time-example col s12 m6">
+                                      <div class="ngx-material-timepicker-example__form-group">
+                                        <input placeholder="checkOut 11:11 pm" aria-label="checkIn"
+                                          [ngxTimepicker]="checkIn" readonly ngModel name="checkIn">
+                                        <ngx-material-timepicker #checkIn [defaultTime]="'11:11 pm'">
+                                        </ngx-material-timepicker>
+                                      </div>
+                                    </div>
+
+                                    <div class="max-time-example col s12 m6">
+                                      <div class="ngx-material-timepicker-example__form-group">
+                                        <input placeholder="checkOut 11:11 pm" aria-label="checkOut"
+                                          [ngxTimepicker]="checkOut" name="checkOut" ngModel readonly>
+                                        <ngx-material-timepicker #checkOut [defaultTime]="'11:11 pm'">
+                                        </ngx-material-timepicker>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="step-actions">
+                                    <div class="row">
+                                      <div class="col m6 s12 mb-3">
+                                      </div>
+                                      <div class="col m3 s12 mb-3">
+                                        <button class="red btn btn-reset right" type="reset">
+                                          <i class="material-icons right">clear</i>Reset
+                                        </button>
+                                      </div>
+                                      <div class="col m3 s12 mb-3">
+                                        <button mat-button matStepperNext
+                                          class="waves-effect waves dark btn btn-primary next-step right">
+                                          Next
+                                          <i class="material-icons right">arrow_forward</i>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </form>
+                              </mat-step>
+
+                              <!-- step 2 -->
+                              <mat-step [stepControl]="amenitiesFormGroup">
+                                <form #amenitie="ngForm">
+
+                                  <ng-template matStepLabel class="col s12">Amenities</ng-template>
+                                  <div class="step-content">  
+                                  <mat-expansion-panel *ngFor="let category of categoriesService">
+                                          <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                {{category.name}}
+                                            </mat-panel-title>
+
+                                          </mat-expansion-panel-header>
+                                        
+                                          <p *ngFor="let service of category._services">
+                                              <label>
+                                                <input type="checkbox" (change)="serviceSelected(service._id,$event)" />
+                                                <span>{{service.name}}</span>
+                                              </label>
+                                            </p>
+                                        </mat-expansion-panel>
+                                        <br><br>
+                                  </div>
+                                  <div class="step-actions">
+                                    <div class="row">
+                                      <div class="col m3 s12 mb-3">
+
+                                      </div>
+                                      <div class="col m3 s12 mb-3">
+                                        <button class="red btn btn-reset right" type="reset">
+                                          <i class="material-icons left">clear</i>Reset
+                                        </button>
+                                      </div>
+                                      <div class="col m3 s12 mb-3">
+                                        <button mat-button matStepperPrevious class="btn btn-light previous-step right">
+                                          <i class="material-icons left">arrow_back</i>
+                                          Prev
+                                        </button>
+                                      </div>
+                                      <div class="col m3 s12 mb-3">
+                                        <button mat-button matStepperNext
+                                          class="waves-effect waves dark btn btn-primary next-step right">
+                                          Next
+                                          <i class="material-icons right">arrow_forward</i>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                              </mat-step>
+                              <!-- step 3 -->
+                              <mat-step [stepControl]="policiesFormGroup">
+                                <form #policie="ngForm">
+
+                                  <ng-template matStepLabel>Policies</ng-template>
+                                  <div class="step-content">
+
+
+                                    <p *ngFor="let restruction of restructions">
+                                      <label>
+                                        <input type="checkbox" (change)="restructionSelected(restruction._id,$event)" />
+                                        <span>{{restruction.name}}</span>
+                                      </label>
+                                    </p>
+
+
+                                    <div class="step-actions">
+                                      <div class="row">
+                                        <div class="col m3 s12 mb-3">
+
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button class="red btn btn-reset right" type="reset">
+                                            <i class="material-icons left">clear</i>Reset
+                                          </button>
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button mat-button matStepperPrevious
+                                            class="btn btn-light previous-step right">
+                                            <i class="material-icons left">arrow_back</i>
+                                            Prev
+                                          </button>
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button mat-button matStepperNext
+                                            class="waves-effect waves dark btn btn-primary next-step right">
+                                            Next
+                                            <i class="material-icons right">arrow_forward</i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                              </mat-step>
+                              <!-- step 4 -->
+                              <mat-step [stepControl]="matInfoFormGroup">
+                                <form #meta="ngForm">
+
+                                  <ng-template matStepLabel>MetaInfo</ng-template>
+                                  <div class="step-content">
+                                    <div class="row">
+                                      <div class="input-field col m6 s12">
+                                        <label for="metaTitle">Meta Title <span class="red-text">*</span></label>
+                                        <input type="text" id="metaTitle" ngModel name="metaTitle" #metaTitle="ngModel"
+                                          required>
+                                        <div *ngIf="metaTitle.touched && !name.valid" class="invalid-feedback">
+                                          <div *ngIf="metaTitle.errors.required"> Meta title is required</div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                    <div class="row">
+                                      <div class="input-field col m6 s12">
+                                        <label for="metaKey">Meta Keywords<span class="red-text">*</span></label>
+                                        <textarea name="metaKey" id="metaKey" rows="4" ngModel #metaKey="ngModel"
+                                          class="materialize-textarea"></textarea>
+                                        <div *ngIf="metaKey.touched && !metaKey.valid" class="invalid-feedback">
+                                          <div *ngIf="metaKey.errors.required"> Meta Key is required</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+
+                                      <div class="input-field col m6 s12">
+                                        <label for="metaDesc">Meta Description <span class="red-text">*</span></label>
+                                        <textarea name="metaDesc" id="metaDesc" rows="4" #metaDesc="ngModel" ngModel
+                                          class="materialize-textarea"></textarea>
+                                        <div *ngIf="metaDesc.touched && !metaDesc.valid" class="invalid-feedback">
+                                          <div *ngIf="metaDesc.errors.required"> Meta Desc is required</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="step-actions">
+                                      <div class="row">
+                                        <div class="col m3 s12 mb-3">
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button class="red btn btn-reset right" type="reset">
+                                            <i class="material-icons left">clear</i>Reset
+                                          </button>
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button mat-button matStepperPrevious
+                                            class="btn btn-light previous-step right">
+                                            <i class="material-icons left">arrow_back</i>
+                                            Prev
+                                          </button>
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button mat-button matStepperNext
+                                            class="waves-effect waves dark btn btn-primary next-step right">
+                                            Next
+                                            <i class="material-icons right">arrow_forward</i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                              </mat-step>
+                              <!-- step 5 -->
+                              <mat-step [stepControl]="imagesFormGroup">
+                                <form #imageF="ngForm">
+
+                                  <ng-template matStepLabel class="col s12">Images</ng-template>
+                                  <div class="step-content">
+                                    <div class="row section">
+                                      <div class="file-field input-field ">
+                                        <div class="btn">
+                                          <span>File</span>
+                                          <input type="file" (change)="fileChangeListener($event)">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                          <input class="file-path validate" type="text">
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col s12 m6">
+                                          <img-cropper #cropper [image]="data" [settings]="cropperSettings"
+                                            (onCrop)="cropped($event)" aria-placeholder="drog and">
+                                          </img-cropper>
+                                        </div>
+                                        <div class="col s12 m3" *ngIf="data.image">
+                                          <br><br>
+                                          <div class="result">
+                                            <img [src]="data.image" [width]="cropperSettings.croppedWidth"
+                                              [height]="cropperSettings.croppedHeight">
+                                          </div>
+                                        </div>
+                                        <div class="input-field col m3 s12" *ngIf="data.image">
+                                          <br>
+                                          <mat-form-field class="example-full-width">
+                                              <textarea matInput name="descImage" ngModel id="descImage" placeholder="description"></textarea>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div *ngIf="data.image" class="input-field col m6 s12">
+                                          <button class="waves-effect waves-light btn-small cyan pulse"
+                                            (click)="upload(imageF)">save
+                                            image
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col s12">
+                                        <div *ngIf="images !== undefined && images.length > 0">
+                                          <ng-image-slider [images]="images" #nav></ng-image-slider>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="step-actions">
+                                      <div class="row">
+                                        <div class="col m3 s12 mb-3">
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button class="red btn btn-reset right" type="reset">
+                                            <i class="material-icons left">clear</i>Reset
+                                          </button>
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button mat-button matStepperPrevious
+                                            class="btn btn-light previous-step right">
+                                            <i class="material-icons left">arrow_back</i>
+                                            Prev
+                                          </button>
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button mat-button matStepperNext
+                                            class="waves-effect waves dark btn btn-primary next-step right">
+                                            Next
+                                            <i class="material-icons right">arrow_forward</i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                              </mat-step>
+                              <!-- step 6 -->
+                              <mat-step [stepControl]="locationFormGroup">
+                                <form #location="ngForm">
+
+                                  <ng-template matStepLabel class="col s12">Location</ng-template>
+                                  <div class="step-content">
+                                    <div class="row">
+                                      <div class="input-field col m6 s12">
+                                        <label for="adress">Adress <span class="red-text">*</span></label>
+                                        <input type="text" id="adress" name="adress" ngModel required="" required>
+                                      </div>
+                                      <div class="input-field col m6 s12">
+                                        <input id="icon_telephone" type="number" ngModel name="postalCode">
+                                        <label for="icon_telephone">Postal Code</label>
+                                      </div>
+
+                                    </div>
+                                    <div class="row">
+                                      <mat-form-field class="input-field col m6 s12">
+                                        <mat-select [formControl]="countryCtrl" placeholder="Country" #singleSelect
+                                          ngModel (ngModelChange)="showCity($event)">
+                                          <mat-option>
+                                            <ngx-mat-select-search [formControl]="countryFilterCtrl">
+                                            </ngx-mat-select-search>
+                                          </mat-option>
+                                          <mat-option *ngFor="let country of filteredCountries | async"
+                                            [value]="country">
+                                            {{country.name}}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+
+                                      <mat-form-field class="input-field col m6 s12">
+                                        <mat-select [formControl]="cityCtrl" placeholder="City" #singleSelect ngModel>
+                                          <mat-option>
+                                            <ngx-mat-select-search [formControl]="cityFilterCtrl">
+                                            </ngx-mat-select-search>
+                                          </mat-option>
+                                          <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+                                            {{city.name}}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col m6 s12 mb-6">
+                                        <div class="input-field col m12 s12">
+                                          <input id="lan" type="number" ngModel name="long">
+                                          <label for="lan">Longitude</label>
+                                        </div>
+                                        <div class="input-field col m12 s12">
+                                          <input id="lat" type="number" ngModel name="lat">
+                                          <label for="lat">Latitude</label>
+                                        </div>
+                                        <div class="input-field col m12 s12">
+                                          <input id="dCity" type="number" ngModel name="dCity">
+                                          <label for="dCity">Distance city centre(km)</label>
+                                        </div>
+
+                                        <div class="input-field col m12 s12">
+                                          <input id="dNearlyT" type="number" ngModel name="dNearlyT">
+                                          <label for="dNearlyT">Distance Nearest Bus / Metro Stop (mts)</label>
+                                        </div>
+                                      </div>
+                                      <div class="col m6 s12 mb-6">
+                                        <agm-map [latitude]="lat" [longitude]="lng">
+                                          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                                        </agm-map>
+                                      </div>
+                                    </div>
+
+                                    <div class="step-actions">
+                                      <div class="row">
+                                        <div class="col m3 s12 mb-3">
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button class="red btn btn-reset right" type="reset">
+                                            <i class="material-icons left">clear</i>Reset
+                                          </button>
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button mat-button matStepperPrevious
+                                            class="btn btn-light previous-step right">
+                                            <i class="material-icons left">arrow_back</i>
+                                            Prev
+                                          </button>
+                                        </div>
+                                        <div class="col m3 s12 mb-3">
+                                          <button mat-button matStepperNext
+                                            class="waves-effect waves dark btn btn-primary next-step right">
+                                            Next
+                                            <i class="material-icons right">arrow_forward</i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                              </mat-step>
+                              <!-- step 7 -->
+                              <mat-step [stepControl]="contactFormGroup">
+
+                                <form #contact="ngForm"
+                                  (ngSubmit)="addEstab(general.value,amenitie.value,policie.value,meta.value,imageF.value,location.value,contact.value)">
+
+                                  <ng-template matStepLabel class="col s12">Contact</ng-template>
+                                  <div class="step-content">
+                                    <div class="row">
+                                      <div class="input-field col m6 s12">
+                                        <img src="https://img.icons8.com/material/24/000000/domain--v1.png">SiteWeb
+
+                                        <input type="text" ngModel id="webSite" placeholder="https://www" name="webSite"
+                                          required="" required>
+                                      </div>
+                                      <div class="input-field col m6 s12">
+                                        <img src="https://img.icons8.com/material/24/000000/youtube--v1.png">Youtube
+
+                                        <input type="text" ngModel id="youtube" placeholder="https://www.youtube.com/"
+                                          name="youtube" required="" required>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="input-field col m6 s12">
+                                        <img src="https://img.icons8.com/material/24/000000/facebook--v1.png">
+                                        Facebook
+                                        <input type="text" ngModel id="facebook" placeholder="https://www.facebook.com/"
+                                          name="facebook" required="" required>
+                                      </div>
+
+
+                                      <div class="input-field col m6 s12">
+                                        <img src="https://img.icons8.com/material/24/000000/linkedin.png">
+                                        LinkedIn
+                                        <input type="text" ngModel id="linkedIn" placeholder="https://www.linkedin.com/"
+                                          name="linkedIn" required="" required>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="input-field col m6 s12">
+                                        <img src="https://img.icons8.com/material/24/000000/twitter.png">
+                                        Twitter
+                                        <input type="text" ngModel id="twitter" placeholder="https://twitter.com/"
+                                          id="twitter" name="twitter" required="" required>
+                                      </div>
+
+                                      <div class="input-field col m6 s12">
+                                        <img src="https://img.icons8.com/material/24/000000/instagram.png">
+                                        Instagram
+
+                                        <input type="text" id="instagram" ngModel
+                                          placeholder="https://www.instagram.com/" name="instagram" required=""
+                                          required>
+                                      </div>
+                                    </div>
+                                    <div class="col s12 m6 xl4">
+
+                                      <div id="profile-card" class="card">
+
+                                        <div class="card-content">
+                                          <h5 class="card-title activator grey-text text-darken-4">Owner
+                                          </h5>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input id="firstNameO" type="text" ngModel name="firstNameO">
+                                            <label for="firstNameO">First Name</label>
+                                          </div>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">perm_identity</i>
+                                            <input id="lastName" type="text" ngModel name="lastNameO">
+                                            <label for="lastName">Last Name</label>
+                                          </div>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">perm_phone_msg</i>
+                                            <input id="phone" type="text" ngModel name="phoneO">
+                                            <label for="phone">Phone</label>
+                                          </div>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">email</i>
+                                            <input id="email" type="text" ngModel name="emailO">
+                                            <label for="email">Email</label>
+                                          </div>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">print</i>
+                                            <input id="fax" type="text" ngModel name="fax">
+                                            <label for="fax">Fax</label>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>
+                                    <div class="col s12 m6 xl4">
+
+                                      <div id="profile-card" class="card">
+
+                                        <div class="card-content">
+                                          <h5 class="card-title activator grey-text text-darken-4">Reservation
+                                          </h5>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input id="firstNameR" type="text" ngModel name="firstNameR">
+                                            <label for="firstNameR">First Name</label>
+                                          </div>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">perm_identity</i>
+                                            <input id="lastNameR" type="text" ngModel name="lastNameR">
+                                            <label for="lastNameR">Last Name</label>
+                                          </div>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">perm_phone_msg</i>
+                                            <input id="phoneR" type="text" ngModel name="phoneR">
+                                            <label for="phoneR">Phone</label>
+                                          </div>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">email</i>
+                                            <input id="emailR" type="text" ngModel name="emailR">
+                                            <label for="emailR">Email</label>
+                                          </div>
+                                          <br><br><br>
+                                        </div>
+
+                                      </div>
+                                    </div>
+
+                                    <div class="col s12 m6 xl4">
+
+                                      <div id="profile-card" class="card">
+
+                                        <div class="card-content">
+
+                                          <h5 class="card-title activator grey-text text-darken-4">Accounting
+                                          </h5>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input id="firstNameA" type="text" ngModel name="firstNameA">
+                                            <label for="firstNameA">First Name</label>
+                                          </div>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">perm_identity</i>
+                                            <input id="lastNameA" type="text" ngModel name="lastNameA">
+                                            <label for="lastNameA">Last Name</label>
+                                          </div>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">perm_phone_msg</i>
+                                            <input id="phoneA" type="text" ngModel name="phoneA">
+                                            <label for="phoneA">Phone</label>
+                                          </div>
+                                          <div class="input-field">
+                                            <i class="material-icons prefix">email</i>
+                                            <input id="emailA" type="text" ngModel name="emailA">
+                                            <label for="emailA">Email</label>
+                                          </div>
+                                          <br><br><br>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="step-actions">
+                                      <div class="row">
+
+                                        <div class="col m9 s12 mb-9">
+                                          <button class="red btn btn-reset right" type="reset">
+                                            <i class="material-icons left">clear</i>Reset
+                                          </button>
+                                        </div>
+                                        <div class="col m3 s12 mb-">
+                                          <button mat-button matStepperPrevious
+                                            class="btn btn-light previous-step right">
+                                            <i class="material-icons left">arrow_back</i>
+                                            Prev
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="col m12 s12 mb-4">
+                                    <input type="submit" class="btn btn-raised btn-primary right" value="Valider">
+                                  </div>
+
+
+                                </form>
+                              </mat-step>
+                            </mat-horizontal-stepper>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<app-footer></app-footer>

@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="section section-data-tables">
+        <!-- DataTables example -->
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s12">
+                                <a class="mb-6 btn waves-effect waves-light gradient-45deg-purple-deep-orange">
+                                    <i class="material-icons left">add_circle</i>Client Api</a>
+                                <table id="page-length-option" class="display">
+                                    <thead>
+                                    <tr>
+                                        <th>firstName</th>
+                                        <th>lastName</th>
+                                        <th>email</th>
+                                        <th>phone</th>
+                                        <th>name_company</th>
+                                        <th>nationality</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let client of clients">
+                                        <td>{{client.user.firstName}}</td>
+                                        <td>{{client.user.lastName}}</td>
+                                        <td>{{client.user.email}}</td>
+                                        <td>{{client.user.phone}}</td>
+                                        <td>{{client.clientap.nameComapny}}</td>
+                                        <td>{{client.clientap.nationality}}</td>
+                                        <td>
+                                            <a class="mb-6 btn-floating waves-effect waves-light amber darken-4">
+                                                <i class="material-icons">mode_edit</i>
+                                            </a>
+                                            <a class="mb-6 btn-floating waves-effect waves-light red accent-2"
+                                               (click)=" popUp(client) ">
+                                                <i class="material-icons">delete_forever</i>
+                                            </a>
+                                            <a class="mb-6 btn-floating waves-effect waves-light green"
+                                               href="establishments/{{client._id}}">
+                                                <i class="material-icons">remove_red_eye</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>firstName</th>
+                                        <th>lastName</th>
+                                        <th>email</th>
+                                        <th>phone</th>
+                                        <th>name_company</th>
+                                        <th>nationality</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END DataTables example -->
+
+
+    </div>
+</div>

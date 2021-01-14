@@ -1,0 +1,54 @@
+<app-home></app-home>
+<div id="main">
+    <div class="row">
+        <div id="validation" >
+            <div class="card-content">
+              <h4 class="card-title">edit Contact</h4>
+              <form class="col s12" (ngSubmit)="editContact()" [formGroup]="editContactForm">
+                <div class="row">
+
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input [(ngModel)]="contact.firstName" type="text" class="form-control"
+                    formControlName="firstName" required/>
+</div>
+
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="lastName" type="text" type="text" class="form-control" formControlName="lastName"
+                    [(ngModel)]="contact.lastName" required>
+
+                </div>
+</div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" type="email" type="text" class="form-control" formControlName="email"
+                        [(ngModel)]="contact.email" required>
+                       </div>
+
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">phone</i>
+                    <input id="phone" type="text" class="form-control" formControlName="phone"
+                    [(ngModel)]="contact.phone" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">business_center</i>
+                    <input id="job" type="text" class="form-control" formControlName="job"
+                    [(ngModel)]="contact.job" required>
+
+                  </div>
+                    <div class="input-field col s6">
+                      <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                      </button>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+

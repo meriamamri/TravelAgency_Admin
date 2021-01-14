@@ -1,0 +1,129 @@
+<app-home></app-home>
+<!-- BEGIN: Page Main-->
+<div id="main">
+  <div class="row">
+    <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+    <div class="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
+      <!-- Search for small screen-->
+      <div class="container">
+        <div class="row">
+          <div class="col s10 m6 l6">
+            <h5 class="breadcrumbs-title mt-0 mb-0">Establishments</h5>
+            <ol class="breadcrumbs mb-0">
+              <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a>
+              </li>
+
+              <li class="breadcrumb-item active" ><a [routerLink]="['/establishments/all']" >Establishments</a>
+              </li>
+
+              <li class="breadcrumb-item active">Room type
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="container">
+        <div class="section section-data-tables">
+          <div class="card">
+            <div class="card-content">
+              <p class="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes
+                to help
+                you style your table as easily as possible. In addition, to improve mobile experience, all tables on
+                mobile-screen widths are centered automatically.</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="row">
+                    <div class="col s12">
+                      <a class="mb-6 btn waves-effect waves-light gradient-45deg-purple-deep-orange"
+                         (click)="onCreate()">
+                        <i class="material-icons left">add_circle</i>Room type</a>
+                      <table id="page-length-option" class="display">
+                        <thead>
+                        <tr>
+                          <th>Code</th>
+                          <th>Name</th>
+                          <th>Facilities</th>
+                          <th>Availability</th>
+                          <th>Disposition</th>
+                          <th>Prices</th>
+                          <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let roomtype of roomstype">
+                          <td>{{roomtype.code}}</td>
+                          <td>{{roomtype.name}}</td>
+                          <td>
+                            <a [routerLink]="['/']"
+                               class="waves-effect waves-light btn-small">
+                              <i class="material-icons dp48">weekend</i><!--Facility-->
+                            </a>
+                          </td>
+                          <td>
+                            <a [routerLink]="['/']"
+                               class="waves-effect waves-light btn-small">
+                              <i class="material-icons dp48">date_range</i> <!--Availability-->
+                            </a>
+                          </td>
+                          <td>
+                            <a [routerLink]="['/']"
+                               class="waves-effect waves-light btn-small">
+                              <i class="material-icons dp48">wc</i><!--Disposition-->
+                            </a>
+                          </td>
+                          <td>
+                            <a [routerLink]="['/']"
+                               class="waves-effect waves-light btn-small">
+                              <i class="material-icons dp48">attach_money</i><!--Prices-->
+                            </a>
+                          </td>
+                          <td>
+                            <a class="mb-6 btn-floating waves-effect waves-light amber darken-4" (click)="onEdit(roomtype)">
+                              <i class="material-icons">mode_edit</i>
+                            </a>&nbsp;&nbsp;
+                            <a class="mb-6 btn-floating waves-effect waves-light red accent-2"
+                               (click)=" popUp(roomtype) ">
+                              <i class="material-icons">delete_forever</i>
+                            </a>&nbsp;&nbsp;
+                            <a class="mb-6 btn-floating waves-effect waves-light green">
+                              <i class="material-icons">remove_red_eye</i>
+                            </a>
+
+                          </td>
+                        </tr>
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Code</th>
+                          <th>Name</th>
+                          <th>Facilities</th>
+                          <th>Availability</th>
+                          <th>Disposition</th>
+                          <th>Prices</th>
+                          <th>Actions</th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END DataTables example -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END: Page Main-->
+<app-footer></app-footer>

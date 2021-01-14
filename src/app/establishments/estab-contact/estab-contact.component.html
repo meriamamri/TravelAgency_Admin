@@ -1,0 +1,210 @@
+
+<app-home></app-home>
+<!-- BEGIN: Page Main-->
+<div id="main">
+    <div class="row">
+      <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+      <div class="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+          <div class="row">
+            <div class="col s10 m6 l6">
+              <h5 class="breadcrumbs-title mt-0 mb-0">Contacts</h5>
+              <ol class="breadcrumbs mb-0">
+                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                </li>
+
+                <li class="breadcrumb-item active">Contacts
+                </li>
+              </ol>
+            </div>
+            <div class="col s2 m6 l6"><a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-target="dropdown1"><i class="material-icons hide-on-med-and-up">settings</i><span class="hide-on-small-onl">Settings</span><i class="material-icons right">arrow_drop_down</i></a>
+              <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                <li tabindex="0"><a class="grey-text text-darken-2" href="user-profile-page.html">Profile<span class="new badge red">2</span></a></li>
+                <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a></li>
+                <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                <li class="divider" tabindex="-1"></li>
+                <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <div class="col s12">
+        <div class="container">
+          <div class="section section-data-tables">
+  <div class="card">
+  <div class="card-content">
+    <p class="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes to help
+      you style your table as easily as possible. In addition, to improve mobile experience, all tables on
+      mobile-screen widths are centered automatically.</p>
+  </div>
+  </div>
+  <div class="row">
+      <div class="col s12 m12 l12">
+    <a class="mb-6 btn waves-effect waves-light gradient-45deg-purple-deep-orange modal-trigger" href="#modal1">
+      <i class="material-icons left">add_circle</i>Contact</a>
+      </div></div>
+
+<div class="col s12 m6 xl3" *ngFor="let contact of contacts">
+  <div id="profile-card" class="card">
+     <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="assets/app-assets/images/gallery/28.png" alt="user bg" />
+     </div>
+     <div class="card-content">
+        <img src="assets/app-assets/images/avatar/avatar-7.png" alt="" class="circle responsive-img activator card-profile-image cyan lighten-1 padding-2" />
+        <a class="btn-floating activator btn-move-up waves-effect waves-light amber accent-2 z-depth-4 right" href="establishments/contact/{{contact._id}}">
+           <i class="material-icons">edit</i>
+        </a>
+        <h5 class="card-title activator grey-text text-darken-4">{{contact.firstName}}{{contact.lastName}}</h5>
+        <p><i class="material-icons profile-card-i">business_center</i> {{contact.job}}</p>
+        <p><i class="material-icons profile-card-i">perm_phone_msg</i> {{contact.phone}}</p>
+        <p><i class="material-icons profile-card-i">email</i> {{contact.email}}</p>
+        <a class="mb-6 btn-floating waves-effect waves-light red accent-2" (click)=" popUp(contact) ">
+          <i class="material-icons">delete_forever</i>
+        </a>
+     </div>
+
+     <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Edit Contact <i class="material-icons right">close</i>
+        </span>
+        <form class="col s12">
+        <p><i class="material-icons">business_center</i> {{contact.job}}</p>
+        <p><i class="material-icons">perm_phone_msg</i> {{contact.phone}}</p>
+        <p><i class="material-icons">email</i> {{contact.email}}</p>
+        <p><i class="material-icons">cake</i> 18th June 1990</p>
+        <p></p>
+        <p><i class="material-icons">airplanemode_active</i> BAR - AUS</p>
+        <p></p>
+        </form>
+     </div>
+  </div>
+</div>
+  <!-- Modal Example -->
+  <div class="row">
+                <div id="modal1" class="modal">
+                  <div class="modal-content">
+                    <!-- Form with validation -->
+
+      <div id="validation" >
+        <div class="card-content">
+          <h4 class="card-title">Add Contact</h4>
+          <form class="col s12" (ngSubmit)="saveContact()" [formGroup]="addContactForm">
+            <div class="row">
+
+              <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="firstName" type="text" class="form-control" formControlName="firstName"
+                [(ngModel)]="contact.firstName" required>
+                <div *ngIf="addContactForm.controls['firstName'].invalid && (addContactForm.controls['firstName'].dirty || addContactForm.controls['firstName'].touched)" class="alert alert-danger">
+                  <div *ngIf="addContactForm.controls['firstName'].errors.required">
+                    <div class="card-alert card red">
+                      <div class="card-content white-text">
+                        <p> First Name is required</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="addContactForm.controls['firstName'].errors.minLength">
+                      <div class="card-alert card red">
+                          <div class="card-content white-text">
+                            <p> First Name must be a letaset 3 charector</p>
+                          </div>
+                        </div>
+                  </div>
+                    <div *ngIf="addContactForm.controls['firstName'].errors.pattern">
+                        <div class="card-alert card red">
+                            <div class="card-content white-text">
+                              <p> First Name must be alphabetic only</p>
+                            </div>
+                          </div>
+                    </div>
+                  </div>
+                  <label for="firstName">FirstName</label>
+              </div>
+
+              <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="lastName" type="text" type="text" class="form-control" formControlName="lastName"
+                [(ngModel)]="contact.lastName" required>
+                <div *ngIf="this.addContactForm.get('lastName').touched && this.addContactForm.get('lastName').invalid">
+                  <div *ngIf="this.addContactForm.get('lastName').errors.required">
+                     <div class="card-alert card red">
+                        <div class="card-content white-text">
+                          <p> Last Name is required</p>
+                        </div>
+                      </div>
+                    </div>
+                  <div *ngIf="this.addContactForm.get('lastName').errors.pattern">
+                    <div class="card-alert card red">
+                      <div class="card-content white-text">
+                        <p> First Name must be a letaset 3 charector</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <label for="lastName">LastName</label>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">email</i>
+                    <input id="email" type="email" type="text" class="form-control" formControlName="email"
+                    [(ngModel)]="contact.email" required>
+                    <div *ngIf="this.addContactForm.get('email').touched && this.addContactForm.get('email').invalid">
+                      <div *ngIf="this.addContactForm.get('email').errors.required">
+                        <div class="card-alert card red">
+                          <div class="card-content white-text">
+                            <p>email is required</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="this.addContactForm.get('email').errors.pattern">
+                        <div class="card-alert card red">
+                           <div class="card-content white-text">
+                             <p> First Name is required</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <label for="email">Email</label>
+                    </div>
+
+              <div class="input-field col s6">
+                <i class="material-icons prefix">phone</i>
+                <input id="phone" type="text" class="form-control" formControlName="phone"
+                [(ngModel)]="contact.phone" required>
+                <label for="phone">Phone</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">business_center</i>
+                <input id="job" type="text" class="form-control" formControlName="job"
+                [(ngModel)]="contact.job" required>
+                <label for="job">Job</label>
+              </div>
+                <div class="input-field col s6">
+                  <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+

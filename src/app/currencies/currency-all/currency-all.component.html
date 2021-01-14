@@ -1,0 +1,93 @@
+<app-home></app-home>
+<body>
+<div id="main">
+  <div class="row">
+    <div class="pt-3 pb-1" id="breadcrumbs-wrapper">
+      <!-- Search for small screen-->
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m6 l6">
+            <h5 class="breadcrumbs-title mt-0 mb-0">DataTable</h5>
+          </div>
+          <div class="col s12 m6 l6 right-align-md">
+            <ol class="breadcrumbs mb-0">
+              <li class="breadcrumb-item"><a href="index.html">Home</a>
+              </li>
+              <li class="breadcrumb-item"><a href="#">Table</a>
+              </li>
+              <li class="breadcrumb-item active">DataTable
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="container">
+        <div class="section section-data-tables">
+          <div class="card">
+            <div class="card-content">
+              <p class="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes to help
+                you style your table as easily as possible. In addition, to improve mobile experience, all tables on
+                mobile-screen widths are centered automatically.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <div class="card">
+                <div class="card-content">
+                  <h4 class="card-title">Currencies</h4>
+                  <div class="row">
+                    <div class="col s12">
+                      <table id="page-length-option" class="display">
+                        <thead>
+                        <tr>
+                          <th>Symbol</th>
+                          <th>Tarif</th>
+                          <th>Active</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr  *ngFor="let currency of currencys">
+                          <td>{{currency.symbol}}</td>
+                          <td>{{currency.tarif}}</td>
+                          <td>
+                            <!-- Switch -->
+                            <div class="switch">
+                              <label> Off
+                                <input type="checkbox" [checked]="currency.active" (change)="currency.active = !currency.active" >
+                                <span class="lever"></span>
+                                On
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-amber-amber gradient-shadow">
+                              <i class="material-icons">mode_edit</i>
+                            </a>&nbsp;&nbsp;
+                            <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-red-pink gradient-shadow" (click)="deleteCurrency(deleteCurrency)">
+                              <i class="material-icons"(click)="deleteCurrency(currency)">clear</i>
+                            </a>
+
+                          </td>
+
+                        </tr>
+
+                        </tbody>
+
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<app-footer></app-footer>

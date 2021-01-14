@@ -1,0 +1,88 @@
+<!-- BEGIN: SideNav-->
+<aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square">
+  <div class="brand-sidebar">
+    <h1 class="logo-wrapper"><a class="brand-logo darken-1" [routerLink]="['/']"><img
+      src="assets/app-assets/images/logo/materialize-logo-color.png" alt="materialize logo"/><span
+      class="logo-text hide-on-med-and-down"></span></a><a class="navbar-toggler" href="#"></a></h1>
+  </div>
+  <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out"
+      data-menu="menu-navigation" data-collapsible="menu-accordion">
+    <li class="active bold"><a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">settings_input_svideo</i><span
+      class="menu-title" data-i18n="">Dashboard</span><span
+      class="badge badge pill orange float-right mr-10">3</span></a>
+      <div class="collapsible-body">
+        <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+          <li class="active"><a class="collapsible-body active" href="dashboard-modern.html" data-i18n=""><i
+            class="material-icons">radio_button_unchecked</i><span>Modern</span></a>
+          </li>
+          <li><a class="collapsible-body" href="dashboard-ecommerce.html" data-i18n=""><i class="material-icons">radio_button_unchecked</i><span>eCommerce</span></a>
+          </li>
+          <li><a class="collapsible-body" href="dashboard-analytics.html" data-i18n=""><i class="material-icons">radio_button_unchecked</i><span>Analytics</span></a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="active"><a class="waves-effect waves-cyan " [routerLink]="['/superadmin/partners']"><i
+      class="material-icons">group</i><span class="menu-title" data-i18n="">Paterns</span></a>
+
+    <li class="active"><a class="waves-effect waves-cyan " [routerLink]="['/superadmin/demands']"><i
+      class="material-icons">group</i><span class="menu-title" data-i18n="">Demands</span></a>
+    </li>
+    <li class="bold"><a class="waves-effect waves-cyan " [routerLink]="['/establishments/all']"><i
+      class="material-icons">hotel</i><span class="menu-title" data-i18n="">Establishment</span></a>
+    </li>
+    <li class="bold"><a class="waves-effect waves-cyan "><i class="material-icons">airplanemode_active</i><span
+      class="menu-title" data-i18n="">Flight</span></a>
+    </li>
+    <li class="bold"><a class="waves-effect waves-cyan "><i class="material-icons">directions_boat</i><span
+      class="menu-title" data-i18n="">cruise</span></a>
+    </li>
+    <li class="bold"><a class="waves-effect waves-cyan "><i class="material-icons">directions_car</i><span
+      class="menu-title" data-i18n="">Car</span></a>
+    </li>
+    <li class="bold"><a class="waves-effect waves-cyan "><i class="material-icons">directions_bike</i><span
+      class="menu-title" data-i18n="">Activity</span></a>
+    </li>
+    <li class="bold"><a class="collapsible-header waves-effect waves-cyan "><i class="material-icons">pool</i><span
+      class="menu-title" data-i18n="">Holiday</span></a>
+      <div class="collapsible-body">
+        <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+          <li><a class="collapsible-body" data-i18n=""><i class="material-icons">radio_button_unchecked</i><span>Products Page</span></a>
+          </li>
+          <li><a class="collapsible-body" data-i18n=""><i
+            class="material-icons">radio_button_unchecked</i><span>Pricing</span></a>
+          </li>
+          <li><a class="collapsible-body" data-i18n=""><i
+            class="material-icons">radio_button_unchecked</i><span>Invoice</span></a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="bold"><a class="collapsible-header waves-effect waves-cyan "><i class="material-icons">settings</i><span
+      class="menu-title" data-i18n="">Settings</span></a>
+      <div class="collapsible-body">
+        <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+          <li class="bold"><a class="waves-effect waves-cyan" [routerLink]="['/categorys/all']"><i
+            class="material-icons">domain</i><span class="menu-title" data-i18n=""> Types Establishment </span></a>
+          <li class="bold"><a class="waves-effect waves-cyan" [routerLink]="['/hotelChains/all']"><i
+            class="material-icons">location_city</i><span class="menu-title" data-i18n="">Hotel Chains</span></a>
+          <li class="bold"><a class="waves-effect waves-cyan" [routerLink]="['/currencies/all']"><i
+            class="material-icons">attach_money</i><span class="menu-title" data-i18n="">Currencies</span></a>
+          <li class="bold"><a class="waves-effect waves-cyan" [routerLink]="['/categorys/all']"><i
+            class="material-icons">widgets</i><span class="menu-title" data-i18n="">Categorys</span></a>
+
+        </ul>
+      </div>
+    </li>
+
+  </ul>
+  <div class="navigation-background"></div>
+  <a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only"
+     href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
+</aside>
+<!-- END: SideNav-->
+
+
+

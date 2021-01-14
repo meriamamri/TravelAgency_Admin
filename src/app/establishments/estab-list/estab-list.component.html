@@ -1,0 +1,129 @@
+
+<app-home></app-home>
+ <!-- BEGIN: Page Main-->
+ <div id="main">
+  <div class="row">
+    <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+    <div class="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
+      <!-- Search for small screen-->
+      <div class="container">
+        <div class="row">
+          <div class="col s10 m6 l6">
+            <h5 class="breadcrumbs-title mt-0 mb-0">Establishments</h5>
+            <ol class="breadcrumbs mb-0">
+              <li class="breadcrumb-item"><a href="index.html">Home</a>
+              </li>
+
+              <li class="breadcrumb-item active">Establishments
+              </li>
+            </ol>
+          </div>
+          <div class="col s2 m6 l6"><a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-target="dropdown1">
+            <i class="material-icons hide-on-med-and-up">settings</i><span class="hide-on-small-onl">Settings</span>
+            <i class="material-icons right">arrow_drop_down</i></a>
+            <ul class="dropdown-content" id="dropdown1" tabindex="0">
+              <li tabindex="0"><a class="grey-text text-darken-2" href="user-profile-page.html">Profile<span class="new badge red">2</span></a></li>
+              <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a></li>
+              <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+              <li class="divider" tabindex="-1"></li>
+              <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="container">
+        <div class="section section-data-tables">
+<div class="card">
+<div class="card-content">
+  <p class="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes to help
+    you style your table as easily as possible. In addition, to improve mobile experience, all tables on
+    mobile-screen widths are centered automatically.</p>
+</div>
+</div>
+<div class="card-alert card gradient-45deg-green-teal" *ngIf="supprimer">
+  <div class="card-content white-text">
+    <p>
+      <i class="material-icons">check</i> SUCCESS : The establishment has been deleted.</p>
+  </div>
+  <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+<!-- DataTables example -->
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <div class="row">
+          <div class="col s12">
+              <a class="mb-6 btn waves-effect waves-light gradient-45deg-purple-deep-orange" (click)="addEstab()" >
+                  <i class="material-icons left">add_circle</i>Establishment</a>
+            <table id="page-length-option" class="display">
+              <thead>
+                <tr>
+             <th>Code</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Stars</th>
+              <th>Status</th>
+              <th>Rates</th>
+             <th>Actions</th>
+                </tr>
+              </thead>
+               <tbody>
+            <tr  *ngFor="let estab of establishments">
+              <td>{{estab.code}}</td>
+              <td>{{estab.name}}</td>
+              <td>{{estab.email}}</td>
+              <td>{{estab.stars}} <span class="material-icons star-width">star_rate</span></td>
+              <td>{{estab.status}}</td>
+              <td>
+                <a [routerLink]="['/establishments/roomstype/'+estab._id+'/all']"
+                   class="mb-6 btn waves-effect waves-light purple lightrn-1">Rates</a></td>
+              <td>
+              <td>
+                 <a class="mb-6 btn-floating waves-effect waves-light amber darken-4">
+                  <i class="material-icons">mode_edit</i>
+                </a>&nbsp;&nbsp;
+                <a class="mb-6 btn-floating waves-effect waves-light red accent-2" (click)=" popUp(estab) ">
+                  <i class="material-icons">delete_forever</i>
+                </a>&nbsp;&nbsp;
+                <a class="mb-6 btn-floating waves-effect waves-light green"  [routerLink]="['/establishments/'+estab._id]">
+                  <i class="material-icons">remove_red_eye</i>
+                </a>
+
+              </td>
+            </tr>
+
+          </tbody>
+              <tfoot>
+                <tr>
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>email</th>
+                  <th>stars</th>
+                  <th>Status</th>
+                 <th>Actions</th>
+
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- END DataTables example -->
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END: Page Main-->
+<app-footer></app-footer>
